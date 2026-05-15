@@ -35,7 +35,7 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 # OpenRouter API Key
-API_KEY = "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"
+API_KEY = os.getenv("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")
 
 
 # ================= HOME PAGE =================
