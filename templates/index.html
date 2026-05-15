@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>InterviewIQ AI</title>
+
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<!-- TOPBAR -->
+
+<div class="topbar">
+
+    <div class="logo">
+         🤖 InterviewIQ AI
+    </div>
+
+    <div class="nav-right">
+
+        <div class="profile">
+            👤 {{ user }}
+        </div>
+
+        <a href="/logout" class="logout-btn">
+            Logout
+        </a>
+
+    </div>
+
+</div>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+    <div class="nav-links">
+
+        <a href="/">Home</a>
+
+        <a href="/resume-analyzer">
+            Resume Analyzer
+        </a>
+
+        <a href="/job-match">
+            Job Match Analyzer
+        </a>
+
+    </div>
+
+</div>
+
+<div class="main">
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <h1>
+            🤖 Resume Analyzer
+        </h1>
+
+        <p>
+            Upload your resume and get AI-powered analysis
+        </p>
+
+    </div>
+
+    <!-- UPLOAD CARD -->
+
+    <div class="card upload-card">
+
+        <form action="/upload"
+        method="POST"
+        enctype="multipart/form-data">
+
+            <input type="file"
+            name="resume"
+            required>
+
+            <button type="submit">
+                Analyze Resume
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- RESULTS -->
+
+    {% if result %}
+
+    <div class="results-container">
+
+        <!-- SCORES -->
+
+        <div class="score-wrapper">
+
+            <!-- ATS SCORE -->
+
+            <div class="score-card">
+
+                <h2>ATS Score</h2>
+
+                <div class="circle">
+                    <span>{{ ats_score }}/100</span>
+                </div>
+
+            </div>
+
+            <!-- RESUME SCORE -->
+
+            <div class="score-card">
+
+                <h2>Resume Score</h2>
+
+                <div class="circle">
+                    <span>{{ resume_score }}/100</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- SKILLS -->
+
+        <div class="card">
+
+            <h2>💡 Top Skills</h2>
+
+            <div class="skills-container">
+
+                {% for skill in skills %}
+
+                <span class="skill-badge">
+                    {{ skill }}
+                </span>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+        <!-- QUESTIONS -->
+
+        <div class="card">
+
+            <h2>🎯 Interview Questions</h2>
+
+            <ul>
+
+                {% for question in questions %}
+
+                <li>{{ question }}</li>
+
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+        <!-- SUGGESTIONS -->
+
+        <div class="card">
+
+            <h2>⚡ Improvements</h2>
+
+            <ul>
+
+                {% for suggestion in suggestions %}
+
+                <li>{{ suggestion }}</li>
+
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+        <!-- STRENGTHS -->
+
+        <div class="card">
+
+            <h2>✅ Strengths</h2>
+
+            <ul>
+
+                {% for strength in strengths %}
+
+                <li>{{ strength }}</li>
+
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+        <!-- WEAKNESSES -->
+
+        <div class="card">
+
+            <h2>❌ Weaknesses</h2>
+
+            <ul>
+
+                {% for weakness in weaknesses %}
+
+                <li>{{ weakness }}</li>
+
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+        <!-- MISSING KEYWORDS -->
+
+        <div class="card">
+
+            <h2>🔍 Missing Keywords</h2>
+
+            <div class="skills-container">
+
+                {% for keyword in missing_keywords %}
+
+                <span class="skill-badge">
+                    {{ keyword }}
+                </span>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Register</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
+
+    <script src="https://kit.fontawesome.com/7a4b62b0a4.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>Create Account 🚀</h1>
+
+        <p>Join AI Interview Assistant</p>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+
+                <div class="alert">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+        {% endwith %}
+
+        <form method="POST">
+
+            <input type="text" name="name" placeholder="Full Name" required>
+
+            <input type="email" name="email" placeholder="Email" required>
+
+            <div class="password-box">
+
+                <input type="password" name="password" id="password" placeholder="Password" required>
+
+                <i class="fa-solid fa-eye" onclick="togglePassword()"></i>
+
+            </div>
+
+            <button type="submit">Register</button>
+
+        </form>
+
+        <a href="/login">
+            Already have an account?
+        </a>
+
+    </div>
+
+</div>
+
+<script>
+
+function togglePassword(){
+
+    let password = document.getElementById("password")
+
+    if(password.type === "password"){
+
+        password.type = "text"
+
+    }else{
+
+        password.type = "password"
+
+    }
+}
+
+</script>
+
+</body>
+</html>

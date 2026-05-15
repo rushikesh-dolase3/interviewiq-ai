@@ -1,0 +1,6 @@
+Flask
+PyPDF2
+requests
+mysql-connector-python
+Flask-Bcrypt
+gunicorn

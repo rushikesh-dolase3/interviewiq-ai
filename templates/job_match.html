@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Job Match Analyzer</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+    <h2> 🤖 InterviewIQ AI</h2>
+
+    <div class="nav-links">
+
+        <a href="/">Resume Analyzer</a>
+
+        <a href="/job-match">Job Match Analyzer</a>
+
+    </div>
+
+</div>
+
+<div class="main">
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <h1>📄 Job Description Match Analyzer</h1>
+
+        <p>
+            Compare your resume with job description using AI
+        </p>
+
+    </div>
+
+    <!-- FORM -->
+
+    <div class="card">
+
+        <form action="/job-match-analyze"
+        method="POST"
+        enctype="multipart/form-data">
+
+            <input
+                type="file"
+                name="resume"
+                required
+            >
+
+            <textarea
+                name="job_description"
+                placeholder="Paste Job Description Here..."
+                required
+            ></textarea>
+
+            <button type="submit">
+                Analyze Job Match
+            </button>
+
+        </form>
+
+    </div>
+
+    {% if result %}
+
+    <!-- RESULTS -->
+
+    <div class="results-container">
+
+        <!-- MATCH SCORE -->
+
+        <div class="score-card">
+
+            <h2>Job Match Score</h2>
+
+            <div class="circle">
+                <span>{{ match_score }}%</span>
+            </div>
+
+        </div>
+
+        <!-- MATCHED SKILLS -->
+
+        <div class="card">
+
+            <h2>✅ Matched Skills</h2>
+
+            <div class="skills-container">
+
+                {% for skill in matched_skills %}
+
+                    <span class="skill-badge">
+                        {{ skill }}
+                    </span>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+        <!-- MISSING SKILLS -->
+
+        <div class="card">
+
+            <h2>❌ Missing Skills</h2>
+
+            <div class="skills-container">
+
+                {% for skill in missing_skills %}
+
+                    <span class="skill-badge missing">
+                        {{ skill }}
+                    </span>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+        <!-- SUGGESTIONS -->
+
+        <div class="card">
+
+            <h2>⚡ AI Suggestions</h2>
+
+            <ul>
+
+                {% for suggestion in suggestions %}
+
+                    <li>{{ suggestion }}</li>
+
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>
