@@ -564,10 +564,8 @@ def login():
 
         if user:
 
-            if bcrypt.check_password_hash(user['password'], password):
-
-                session['user'] = user['name']
-
+            if bcrypt.check_password_hash(user[3], password):
+                session['user'] = user[1]
                 return redirect('/')
 
         flash("Invalid Email or Password", "error")
