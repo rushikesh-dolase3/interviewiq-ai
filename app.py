@@ -3,10 +3,10 @@ from werkzeug.security import generate_password_hash
 from werkzeug.security import check_password_hash
 from flask_bcrypt import Bcrypt
 import os
+import psycopg2
 import PyPDF2
 import requests
 import json
-import mysql.connector
 import re
 from flask import flash
 
@@ -16,12 +16,16 @@ app = Flask(__name__)
 bcrypt = Bcrypt(app)
 
 # MySQL Connection
-db = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="9657263153",
-    database="ai_interview"
+
+db = psycopg2.connect(
+    host=os.getenv("DB_HOST"),
+    database=os.getenv("DB_NAME"),
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD"),
+    port=os.getenv("DB_PORT")
 )
+
+cursor = db.cursor()
 
 cursor = db.cursor(dictionary=True)
 
@@ -33,9 +37,6 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 # Create uploads folder
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-
-# OpenRouter API Key
-API_KEY = os.getenv("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")
 
 
 # ================= HOME PAGE =================
