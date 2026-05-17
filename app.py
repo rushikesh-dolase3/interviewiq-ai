@@ -25,10 +25,8 @@ db = psycopg2.connect(
     port=os.getenv("DB_PORT")
 )
 
+
 cursor = db.cursor()
-
-cursor = db.cursor(dictionary=True)
-
 app.secret_key = "ai_interview_secret"
 app.config['SESSION_TYPE'] = 'filesystem'
 
