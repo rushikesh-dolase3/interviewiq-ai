@@ -10,7 +10,7 @@ import json
 import re
 from flask import flash
 
-
+API_KEY = os.getenv("OPENROUTER_API_KEY")
 app = Flask(__name__)
 
 bcrypt = Bcrypt(app)
